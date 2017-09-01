@@ -13,9 +13,8 @@ Compared with the [original version](https://github.com/tangkk/tangkk-mirex-ace)
 [librosa](https://github.com/librosa/librosa)
 [hmmlearn](http://hmmlearn.readthedocs.io/en/stable/)
 
-Also install keras (and theano or tensorflow also) to use fcnn or rnn based ace, otherwise you could only run it in "simple" model
-[keras](https://keras.io/)
-[theano](http://www.deeplearning.net/software/theano/)
+Also install [keras](https://keras.io/) (and [theano](http://www.deeplearning.net/software/theano/) or [tensorflow](http://tensorflow.org/) also) to use fcnn or rnn based ace, otherwise you could only run it in "simple" model.
+
 
 ## How to install it?
 ```
