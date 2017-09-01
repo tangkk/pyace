@@ -12,9 +12,9 @@ if __name__ == "__main__":
             line = line.rstrip("\n")
             line = line.rstrip("\r")
             if '.mp3' in line:
-                line = line.rstrip(".mp3")
+                line = line.replace('.mp3','')
             if '.wav' in line:
-                line = line.rstrip(".wav")
+                line = line.replace('.wav','')
             fw.write(line+"\n")
     fw.close()
 
