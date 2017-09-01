@@ -2,16 +2,12 @@
 pyace: A python implementation of automatic chord estimation (ACE) from audio
 
 ## Why this project?
-This is a super light version that derives from my [PhD thesis](https://github.com/tangkk/phd-thesis-junqi-deng/blob/master/junqi-thesis-hku.pdf):
-Deng, J., Large Vocabulary Automatic Chord Estimation from Audio Using Deep Learning Approaches. PhD thesis, Department of Electrical and Electronic Engineering, The University of Hong Kong, 2016
-
-However the [code](https://github.com/tangkk/tangkk-mirex-ace) of this work is written in matlab. So I try to port some of those code into python. But this is by no means a direct porting. It is meant to be minimalist version of ACE, which keeps only the algorithmic gist of the original work.
+This is a super light version that derives from my [PhD thesis](https://github.com/tangkk/phd-thesis-junqi-deng/blob/master/junqi-thesis-hku.pdf). The original [code](https://github.com/tangkk/tangkk-mirex-ace) of this work is written in matlab. So I try to port some of those code into python. But this is by no means a direct porting. It is meant to be minimalist version of ACE, which keeps only the algorithmic gist of the original work.
 
 Compared with the [original version](https://github.com/tangkk/tangkk-mirex-ace) which supports sevenths chords and inversions, this piece of code currently only supports maj and min triads, and it has much lighter (only a few lines of) feature extraction and segmentation codes, which leverages librosa and hmmlearn.
 
 ## What are the dependencies?
-[librosa](https://github.com/librosa/librosa)
-[hmmlearn](http://hmmlearn.readthedocs.io/en/stable/)
+It depends on [librosa](https://github.com/librosa/librosa) for feature extraction and [hmmlearn](http://hmmlearn.readthedocs.io/en/stable/) for chord segmentation (as well as labeling if in the simple model)
 
 Also install [keras](https://keras.io/) (and [theano](http://www.deeplearning.net/software/theano/) or [tensorflow](http://tensorflow.org/) also) to use fcnn or rnn based ace, otherwise you could only run it in "simple" model.
 
@@ -47,8 +43,8 @@ The acemode can be either 'simple', 'fcnn' or 'rnn'.'
 
 for example try the following lines:
 ```
-$python pyace.py aizheni.mp3 simple
-$python pyace.py aizheni.mp3 rnn ./model/lstmrnn512/CJKURB.cg.model
+python pyace.py aizheni.mp3 simple
+python pyace.py aizheni.mp3 rnn ./model/lstmrnn512/CJKURB.cg.model
 ```
 The pretrained models as well as the testcases can be downloaded [here](http://tangkk.net/me/pyace/models.zip)
 
