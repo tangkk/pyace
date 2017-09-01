@@ -1,13 +1,13 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='pyace',
-    version='0.1',
+    version='0.1.1',
     description='A minimal python implementation of automatic chord estimation',
     author='Junqi Deng',
     author_email='dengjunqi06323011@gmail.com',
     url='https://github.com/tangkk/pyace',
-    packages=['pyace'],
+    packages=find_packages(),
     long_description="""\
         This derives from my PhD thesis:
         Deng, J., Large Vocabulary Automatic Chord Estimation from Audio Using Deep Learning Approaches. PhD thesis, Department of Electrical and Electronic Engineering, The University of Hong Kong, 2016

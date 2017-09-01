@@ -9,4 +9,4 @@
 from pyace import simpleace
 from pyace import deepace
 
-__version__ = '0.1'
+__version__ = '0.1.1'
