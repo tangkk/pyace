@@ -249,7 +249,7 @@ if __name__ == '__main__':
             for line in f:
                 line = line.rstrip("\n")
                 line = line.rstrip("\r")
-                line = line.rstrip(".mp3") # only mp3 is allowed
+                line = line.replace('.mp3','') # only mp3 is allowed
 
                 print "now processing..." + line
                 tokens = line.split("/")
