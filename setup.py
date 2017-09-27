@@ -27,8 +27,8 @@ setup(
     install_requires=[
         'numpy >= 1.7.0',
         'librosa',
-        'hmmlearn',
-        'theano',
-        'keras'
+        'hmmlearn'
     ],
 )
+
+# optionally you need to have a workable keras and its backend (theano, tensorflow or CNTK) to get the deepace working
