@@ -9,7 +9,7 @@ Compared with the [original version](https://github.com/tangkk/tangkk-mirex-ace)
 ## What are the dependencies?
 It depends on [librosa](https://github.com/librosa/librosa) for feature extraction and [hmmlearn](http://hmmlearn.readthedocs.io/en/stable/) for chord segmentation (as well as labeling if in the simple model)
 
-Also install [keras](https://keras.io/) (and [theano](http://www.deeplearning.net/software/theano/) or [tensorflow](http://tensorflow.org/) also) to use the FCNN or RNN [models](http://tangkk.net/me/pyace/models.zip), otherwise you could only run it in "simple" model.
+Also install [keras](https://keras.io/) (and [theano](http://www.deeplearning.net/software/theano/) or [tensorflow](http://tensorflow.org/) also) to use the FCNN or RNN models (it seems i've lost these models on my old host machine, anyone who has these please send a copy to me), otherwise you could only run it in "simple" model.
 
 ## How to install it?
 ```
