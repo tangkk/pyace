@@ -44,7 +44,7 @@ For example, try the following lines:
 python pyace.py aizheni.mp3 simple
 python pyace.py aizheni.mp3 rnn ./model/lstmrnn512/CJKURB.cg.model
 ```
-The pretrained models as well as the testcases can be downloaded here(it seems i've lost these models on my old host machine, anyone who has these please, send a copy to me)
+The pretrained models as well as the testcases can be downloaded [here](https://www.dropbox.com/s/akyc2cxhdtgtm71/models.zip?dl=0)
 
 ## Can I modify the code?
 This is a very lite version of ACE. You are strongly encouraged to take this piece of code away and do whatever you want to.
