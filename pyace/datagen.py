@@ -7,7 +7,7 @@ import librosa
 import librosa.display
 import numpy
 from numpy import inf
-import cPickle
+# import cPickle
 import sys
 import os
 import math
@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
         with open(tpath) as tf:
             for tline in tf:
-                print tline
+                print(tline)
                 tline = tline.rstrip("\n")
                 tline = tline.rstrip("\r")
                 tline = tline[:-4]
@@ -48,10 +48,10 @@ if __name__ == '__main__':
                 # *******************************************
                 # feature extraction - use librosa
                 # *******************************************
-                print "feature extraction..."
+                print("feature extraction...")
                 cqtspec, chromagram = fe.fe(audiopath, sr, hopsize)
 
-                print "ground truth segmentation..."
+                print("ground truth segmentation...")
                 with open(os.path.realpath(labelpath)) as f:
                     for line in f:
                         line = line.rstrip("\n")
@@ -62,7 +62,7 @@ if __name__ == '__main__':
                         st = float(tokens[0])
                         et = float(tokens[1])
                         oc = tokens[2]
-                        print tokens
+                        print(tokens)
 
                         # majmin chord mapping
                         chord, isminor = helpers.mmchordmaping(oc)

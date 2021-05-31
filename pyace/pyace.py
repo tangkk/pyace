@@ -6,7 +6,7 @@
 import librosa
 import numpy
 from numpy import inf
-import cPickle
+# import cPickle
 import sys
 import os
 from hmmlearn import hmm
@@ -86,7 +86,7 @@ def segmentation(chords, framedur):
         if (nchord != ochord):
             if 'm' in ochord:  # mirex convention
                 ochord = ochord.replace('m', ':min')
-            print st, et, ochord
+            print(st, et, ochord)
             segments.append((st,et))
             st = et
         ochord = nchord
@@ -104,7 +104,7 @@ def writeres(chords, framedur, respath):
         if (nchord != ochord):
             if 'm' in ochord: # mirex convention
                 ochord = ochord.replace('m',':min')
-            print st, et, ochord
+            print(st, et, ochord)
             fw.write(str(st) + " " + str(et) + " " + ochord + "\n")
             st = et
         ochord = nchord
@@ -123,7 +123,7 @@ def writesegres(Y, segments, respath):
             ochord = helpers.chordnames[y]
         if 'm' in ochord:  # mirex convention
             ochord = ochord.replace('m', ':min')
-        print st, et, ochord
+        print(st, et, ochord)
         fw.write(str(st) + " " + str(et) + " " + ochord + "\n")
     fw.close()
 
@@ -136,19 +136,19 @@ def simpleace(songpath, respath):
     # *******************************************
     # feature extraction - use librosa
     # *******************************************
-    print "feature extraction..."
+    print("feature extraction...")
     chromagram = chromagramextraction(songpath, sr, hopsize)
 
     # ****************************************************
     # segmentation - use an hmmlearn's GaussianHMM
     # ****************************************************
-    print "hmm setup..."
+    print("hmm setup...")
     model = hmmsetup()
 
-    print "hmm decoding..."
+    print("hmm decoding...")
     chords = model.predict(chromagram)
 
-    print "generating output..."
+    print("generating output...")
     writeres(chords, framedur, respath)
 
 def deepace(songpath, respath, acemode, modelpath):
@@ -160,16 +160,16 @@ def deepace(songpath, respath, acemode, modelpath):
     # *******************************************
     # feature extraction - use librosa
     # *******************************************
-    print "feature extraction..."
+    print("feature extraction...")
     chromagram = chromagramextraction(songpath, sr, hopsize)
 
     # ****************************************************
     # segmentation - use an hmmlearn's GaussianHMM
     # ****************************************************
-    print "hmm setup..."
+    print("hmm setup...")
     model = hmmsetup()
 
-    print "generating segmentation..."
+    print("generating segmentation...")
     chords = model.predict(chromagram)
 
     segments = segmentation(chords, framedur)
@@ -177,7 +177,7 @@ def deepace(songpath, respath, acemode, modelpath):
     # ****************************************************
     # classification - use the trained keras model
     # ****************************************************
-    print "segment tiling..."
+    print("segment tiling...")
     X = []
     for seg in segments:
         st = seg[0]
@@ -193,18 +193,18 @@ def deepace(songpath, respath, acemode, modelpath):
     if acemode == 'fcnn':
         X = X.reshape(nsamples,nseg*nbin)
 
-    print "classifying..."
+    print("classifying...")
     model = keras.models.load_model(modelpath)
     Y = model.predict(X)
 
-    print "generating output..."
+    print("generating output...")
     writesegres(Y, segments, respath)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print "please provide at least two arguments"
-        print "try calling the program like:"
-        print "python pyace.py [test_audio_path] [acemode] [modelpath]"
+        print("please provide at least two arguments")
+        print("try calling the program like:")
+        print("python pyace.py [test_audio_path] [acemode] [modelpath]")
         quit()
     testpath = sys.argv[1] # the test tracklist or the test song
     acemode = sys.argv[2] # provide a model path or just use "simple"
@@ -220,20 +220,20 @@ if __name__ == '__main__':
             lyricpath = sys.argv[3]
 
     if '.mp3' in testpath or '.wav' in testpath or '.flac' in testpath:
-        print "this is the single mode"
+        print("this is the single mode")
         if acemode == 'simple':
             simpleace(testpath,testpath+'.chords.txt')
         elif acemode == 'fcnn' or acemode == 'rnn':
             deepace(testpath, testpath+'.chords.txt', acemode, modelpath)
         else:
-            print "ace model not supported!"
+            print("ace model not supported!")
             quit()
 
         if len(lyricpath) > 0:
-            print "combining chords and lyrics..."
+            print("combining chords and lyrics...")
             chordlyrics.chordlyrics(lyricpath, testpath+'.chords.txt', testpath+'.chordlyrics.txt')
     else: # this is the batch mode, make sure you have the audio and label contents put in ./data/
-        print "this is the batch mode, make sure you have the audio and label contents put in ./data/ as required"
+        print("this is the batch mode, make sure you have the audio and label contents put in ./data/ as required")
         resroot = '../data/res'
         songroot = '../data/audio'
         labelroot = '../data/label'
@@ -251,7 +251,7 @@ if __name__ == '__main__':
                 line = line.rstrip("\r")
                 line = line.replace('.mp3','') # only mp3 is allowed
 
-                print "now processing..." + line
+                print("now processing..." + line)
                 tokens = line.split("/")
                 artist = tokens[0]
                 album = tokens[1]
@@ -270,4 +270,4 @@ if __name__ == '__main__':
                 elif acemode == 'rnn' or 'fcnn':
                     deepace(songpath, respath, acemode, modelpath)
                 else:
-                    print "ace model not supported!"
+                    print("ace model not supported!")

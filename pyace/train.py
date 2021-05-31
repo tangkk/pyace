@@ -51,21 +51,21 @@ def load_h5py(root, datasets,traintype):
 
     for dataset in datasets:
         h5path = root + dataset + '.h5'
-        print h5path
+        print(h5path)
 
         with h5py.File(h5path, "r") as f:
             if traintype == 'cg':
-                print "load chromagram data..."
+                print("load chromagram data...")
                 Xcg = f['Xcg'][:]
                 Ycg = f['Ycg'][:]
-                print 'Xcg.shape', Xcg.shape
-                print 'Ycg.shape', Ycg.shape
+                print('Xcg.shape', Xcg.shape)
+                print('Ycg.shape', Ycg.shape)
             if traintype == 'cqt':
-                print "loading cqtspec data..."
+                print("loading cqtspec data...")
                 Xcqt = f['Xcqt'][:]
                 Ycqt = f['Ycqt'][:]
-                print 'Xcqt.shape', Xcqt.shape
-                print 'Ycqt.shape', Ycqt.shape
+                print('Xcqt.shape', Xcqt.shape)
+                print('Ycqt.shape', Ycqt.shape)
 
         try:
             if traintype == 'cg':
@@ -83,34 +83,34 @@ def load_h5py(root, datasets,traintype):
                 Ycqtall = Ycqt
 
     if traintype == 'cg':
-        print "nan to num..."
+        print("nan to num...")
         Xcgall = numpy.nan_to_num(Xcgall)
-        print 'Xcgall minmax:',numpy.min(Xcgall),numpy.max(Xcgall)
-        print 'Ycgall minmax:', numpy.min(Ycgall), numpy.max(Ycgall)
+        print('Xcgall minmax:',numpy.min(Xcgall),numpy.max(Xcgall))
+        print('Ycgall minmax:', numpy.min(Ycgall), numpy.max(Ycgall))
 
         # print "standardizing..."
         # Xcgall = robustscaler(Xcgall)
         # print 'Xcgall minmax:', numpy.min(Xcgall), numpy.max(Xcgall)
 
-        print "outputing..."
-        print 'Xcgall.shape', Xcgall.shape
-        print 'Ycgall.shape', Ycgall.shape
+        print("outputing...")
+        print('Xcgall.shape', Xcgall.shape)
+        print('Ycgall.shape', Ycgall.shape)
 
         return datasplit(Xcgall,Ycgall,0.8)
 
     if traintype == 'cqt':
-        print "nan to num..."
+        print("nan to num...")
         Xcqtall = numpy.nan_to_num(Xcqtall)
-        print 'Xcqtall minmax:', numpy.min(Xcqtall), numpy.max(Xcqtall)
-        print 'Ycqtall minmax:', numpy.min(Ycqtall), numpy.max(Ycqtall)
+        print('Xcqtall minmax:', numpy.min(Xcqtall), numpy.max(Xcqtall))
+        print('Ycqtall minmax:', numpy.min(Ycqtall), numpy.max(Ycqtall))
 
         # print "standardizing..."
         # Xcqtall = robustscaler(Xcqtall)
         # print 'Xcqtall minmax:', numpy.min(Xcqtall), numpy.max(Xcqtall)
 
-        print "outputing..."
-        print 'Xcqtall.shape', Xcqtall.shape
-        print 'Ycqtall.shape', Ycqtall.shape
+        print("outputing...")
+        print('Xcqtall.shape', Xcqtall.shape)
+        print('Ycqtall.shape', Ycqtall.shape)
 
         return datasplit(Xcqtall, Ycqtall, 0.8)
 
@@ -137,11 +137,11 @@ if __name__ == "__main__":
 
     (x_train, y_train), (x_test, y_test) = load_h5py(root, datasets, traintype)
 
-    print "data shape:"
-    print 'x_train.shape', x_train.shape
-    print 'y_train.shape', y_train.shape
-    print 'x_test.shape', x_test.shape
-    print 'y_test.shape', y_test.shape
+    print("data shape:")
+    print('x_train.shape', x_train.shape)
+    print('y_train.shape', y_train.shape)
+    print('x_test.shape', x_test.shape)
+    print('y_test.shape', y_test.shape)
 
     batch_size = 32
     epochs = 200
@@ -179,11 +179,11 @@ if __name__ == "__main__":
     # model.add(Dropout(dropoutrate))
 
     # for cnn or rnn
-    print x_train.shape, 'train shape x'
-    print x_test.shape, 'test shape x'
+    print(x_train.shape, 'train shape x')
+    print(x_test.shape, 'test shape x')
 
-    print y_train.shape, 'train shape y'
-    print y_test.shape, 'test shape y'
+    print(y_train.shape, 'train shape y')
+    print(y_test.shape, 'test shape y')
     input_shape = (nframe, nbin)
     model = Sequential()
     # model.add(LSTM(512,
@@ -243,9 +243,9 @@ if __name__ == "__main__":
                         )
 
     with open(modelhistory, 'wb') as f:
-        cPickle.dump(
-            [history.history['loss'], history.history['val_loss'], history.history['acc'], history.history['val_acc']],
-            f, -1)
+        # cPickle.dump(
+        #     [history.history['loss'], history.history['val_loss'], history.history['acc'], history.history['val_acc']],
+        #     f, -1)
 
     model = keras.models.load_model(modelname)
     plot_model(model, to_file=modelplot)
