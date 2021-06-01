@@ -3,7 +3,7 @@
 import os
 import sys
 import numpy
-import cPickle
+# import cPickle
 import keras
 from keras.models import Sequential
 from keras.models import Model
@@ -243,6 +243,7 @@ if __name__ == "__main__":
                         )
 
     with open(modelhistory, 'wb') as f:
+        pass
         # cPickle.dump(
         #     [history.history['loss'], history.history['val_loss'], history.history['acc'], history.history['val_acc']],
         #     f, -1)
